@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
-import axios from '../lib/axios'
+import axios from '@/lib/axios'
 import React, { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination'
 import { useSearchParams } from 'next/navigation'
 
-const Home = () => {
+export default function Page() {
   const [pageData, setPageData] = useState()
   const [articles, setArticles] = useState([])
   const searchParams = useSearchParams()
@@ -15,6 +15,7 @@ const Home = () => {
     const getArticles = async () => {
       try {
         const response = await axios.get(`api/articles?page=${page}`)
+        console.log(response.data)
 
         setPageData(response.data)
         setArticles(response.data.data)
@@ -23,12 +24,7 @@ const Home = () => {
       }
     }
     getArticles()
-  }, [])
-
-  // useEffect(() => {
-  //   console.log(pageData)
-  //   // setArticles(pageData.data)
-  // }, [pageData])
+  }, [page])
 
   return (
     <>
@@ -153,5 +149,3 @@ const Home = () => {
     </>
   )
 }
-
-export default Home
