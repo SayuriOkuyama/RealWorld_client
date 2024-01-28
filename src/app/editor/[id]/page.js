@@ -29,7 +29,7 @@ export default function Page({ params }) {
     getArticles()
   }, [])
 
-  const handleSubmit = () => {
+  const updateArticle = () => {
     const requestBody = {
       article: {
         title: title,
@@ -39,8 +39,16 @@ export default function Page({ params }) {
       },
     }
     const sendRequest = async () => {
-      await axios.post('api/articles', requestBody)
-      router.push('/')
+      try {
+        const response = await axios.put(
+          `api/articles/${params.id}`,
+          requestBody,
+        )
+        const id = response.data.id
+        router.push(`/article/${id}`)
+      } catch (err) {
+        console.log(err)
+      }
     }
     sendRequest()
   }
@@ -52,33 +60,12 @@ export default function Page({ params }) {
     }
   }
 
-  // const updateArticle = async () => {
-  //   const requestBody = {
-  //     article: {
-  //       title: title,
-  //       description: about,
-  //       body: content,
-  //       tagList: tags,
-  //     }
-  //   try {
-  //     const response = await axios.put(`api/articles/${params.id}`, data)
-  //     const id = response.data.id
-  //     router.push(`/article/${id}`)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   return (
     <>
       <div className="editor-page">
         <div className="container page">
           <div className="row">
             <div className="col-md-10 offset-md-1 col-xs-12">
-              {/* <ul className="error-messages">
-                <li>That title is required</li>
-              </ul> */}
-
               <form>
                 <fieldset>
                   <fieldset className="form-group">
@@ -148,7 +135,7 @@ export default function Page({ params }) {
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
-                    onClick={handleSubmit}>
+                    onClick={updateArticle}>
                     Publish Article
                   </button>
                 </fieldset>
