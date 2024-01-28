@@ -1,8 +1,8 @@
 'use client'
-import Link from 'next/link'
 import axios from '../lib/axios'
 import React, { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination'
+import AllArticles from '@/components/AllArticles'
 import { useSearchParams } from 'next/navigation'
 
 const Home = () => {
@@ -41,59 +41,18 @@ const Home = () => {
                 <ul className="nav nav-pills outline-active">
                   <li className="nav-item">
                     <a className="nav-link" href="">
-                      Your Feed
+                      あなたの投稿
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link active" href="">
-                      Global Feed
+                      すべての投稿
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div>
-                {articles.map(article => {
-                  return (
-                    <>
-                      <div className="article-preview">
-                        <div className="article-meta">
-                          <a href="/profile/eric-simons">
-                            <img src="http://i.imgur.com/Qr71crq.jpg" />
-                          </a>
-                          <div className="info">
-                            <a href="/profile/eric-simons" className="author">
-                              Eric Simons
-                            </a>
-                            <span className="date">January 20th</span>
-                          </div>
-                          <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                            <i className="ion-heart" /> 29
-                          </button>
-                        </div>
-                        <Link
-                          href={`/article/${article.id}`}
-                          className="preview-link">
-                          <h1>{article.title}</h1>
-                          <p>{article.about}</p>
-                          <span>Read more...</span>
-                          <ul className="tag-list">
-                            {article.tags.map(tag => {
-                              return (
-                                <li
-                                  key={`${article.id}.${tag.id}`}
-                                  className="tag-default tag-pill tag-outline">
-                                  {tag.name}
-                                </li>
-                              )
-                            })}
-                          </ul>
-                        </Link>
-                      </div>
-                    </>
-                  )
-                })}
-              </div>
+              <AllArticles articles={articles} />
 
               <ul className="pagination">
                 <Pagination pageData={pageData} />
