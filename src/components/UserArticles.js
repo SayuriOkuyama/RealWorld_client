@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function AllArticles({ articles }) {
+export default function UserArticles({ articles }) {
   return (
     <div>
       {articles.map(article => {
