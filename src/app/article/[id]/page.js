@@ -15,7 +15,7 @@ export default function Page({ params }) {
         const response = await axios.get(`api/articles/${params.id}`)
         setArticle(response.data)
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
     getArticles()
@@ -26,7 +26,7 @@ export default function Page({ params }) {
       await axios.delete(`api/articles/${params.id}`)
       router.push('/')
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 

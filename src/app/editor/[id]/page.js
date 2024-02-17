@@ -23,7 +23,7 @@ export default function Page({ params }) {
         setContent(response.data.content)
         setTags(response.data.tagList)
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
     getArticles()
@@ -47,7 +47,7 @@ export default function Page({ params }) {
         const id = response.data.id
         router.push(`/article/${id}`)
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
     sendRequest()
