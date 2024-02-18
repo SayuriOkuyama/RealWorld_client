@@ -5,6 +5,7 @@ const axios = Axios.create({
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
+  // 異なるオリジンに対して Cookie を送りたい
   withCredentials: true,
   withXSRFToken: true,
 })
